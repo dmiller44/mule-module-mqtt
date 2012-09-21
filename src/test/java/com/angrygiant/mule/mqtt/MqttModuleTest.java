@@ -3,6 +3,7 @@
  */
 package com.angrygiant.mule.mqtt;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
@@ -56,7 +57,8 @@ public class MqttModuleTest extends FunctionalTestCase {
                 try {
                     mqttModule.subscribe("test/subscribe", 2, new SourceCallback() {
                         public Object process() throws Exception {
-                            return null;  //To change body of implemented methods use File | Settings | File Templates.
+                            latch.release();
+                            throw new NotImplementedException("This process has not been implemented!!!");
                         }
 
                         public Object process(Object o) throws Exception {
@@ -74,7 +76,8 @@ public class MqttModuleTest extends FunctionalTestCase {
                         }
 
                         public Object process(Object o, Map<String, Object> stringObjectMap) throws Exception {
-                            return null;  //To change body of implemented methods use File | Settings | File Templates.
+                            latch.release();
+                            throw new NotImplementedException("This process has not been implemented!!!");
                         }
                     });
                 } catch (ConnectionException e) {
