@@ -11,11 +11,15 @@ import org.mule.api.annotations.Module;
 import org.mule.api.ConnectionException;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.Source;
 import org.mule.api.annotations.lifecycle.Start;
 import org.mule.api.annotations.lifecycle.Stop;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.callback.SourceCallback;
+
+import java.util.Date;
+import java.util.Random;
 
 /**
  * Generic module
@@ -138,6 +142,10 @@ public class MqttModule {
      */
     @Start
     public void initialize() throws ConnectionException {
+        this.client = connectClient(getClientId());
+    }
+
+    private MqttClient connectClient(String clientId) throws ConnectionException{
         String brokerUrl = "tcp://" + getBrokerHostName() + ":" + getBrokerPort();
 
         MqttDefaultFilePersistence filePersistence = null;
@@ -154,9 +162,9 @@ public class MqttModule {
 
         try {
             if (filePersistence == null) {
-                this.client = new MqttClient(brokerUrl, getClientId());
+                return new MqttClient(brokerUrl, clientId);
             } else {
-                this.client = new MqttClient(brokerUrl, getClientId(), filePersistence);
+                return new MqttClient(brokerUrl, clientId, filePersistence);
             }
         } catch (MqttException e) {
             logger.error("Error creating client to MQTT broker:", e);
@@ -199,7 +207,7 @@ public class MqttModule {
 
     /**
      * Publish processor - used to publish a message to a given topic on the MQTT broker.
-     *
+     * <p/>
      * <p/>
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:publish}
      *
@@ -237,6 +245,37 @@ public class MqttModule {
         token.waitForCompletion(900000);
 
         return new MqttMuleMessage(message, topic);
+    }
+
+    /**
+         * Publish processor - used to publish a message to a given topic on the MQTT broker.
+         * <p/>
+         * <p/>
+         * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:subscribe}
+         *
+         * @param topicName topic to publish message to
+         * @param qos       qos level to use when publishing message
+         * @param callback       qos level to use when publishing message
+         * @return
+         */
+    @Source
+    public void subscribe(String topicName, @Optional @Default("2") int qos, final SourceCallback callback) throws ConnectionException {
+        logger.info("Creating new client for topic subscription");
+        String timestamp = Integer.toString(1);
+        String subscriberId = "mulesubscriber" + timestamp;
+
+        MqttClient subscriberClient = connectClient(subscriberId);
+
+        try {
+            subscriberClient.setCallback(new MqttTopicListener(subscriberClient, callback, topicName, qos));
+            subscriberClient.connect(connectOptions);
+            subscriberClient.subscribe(topicName, qos);
+        } catch (MqttException e) {
+            logger.error("MQTT Exceptions occurred subscribing", e);
+            throw new ConnectionException(ConnectionExceptionCode.UNKNOWN, null, "Subscription Error", e);
+        }
+
+        logger.info("Done subscribing to topic " + topicName);
     }
 
     //Getters and Setters

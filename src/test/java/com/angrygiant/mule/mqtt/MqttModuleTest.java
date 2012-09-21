@@ -3,24 +3,34 @@
  */
 package com.angrygiant.mule.mqtt;
 
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttTopic;
+import org.junit.Assert;
+import org.mule.api.ConnectionException;
 import org.mule.api.MuleEvent;
+import org.mule.api.callback.SourceCallback;
 import org.mule.construct.Flow;
 
 import org.junit.Test;
 import org.mule.tck.AbstractMuleTestCase;
 import org.mule.tck.FunctionalTestCase;
+import org.mule.util.concurrent.Latch;
 
-public class MqttModuleTest extends FunctionalTestCase
-{
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+public class MqttModuleTest extends FunctionalTestCase {
+
+    private MqttModule mqttModule = new MqttModule();
+
     @Override
-    protected String getConfigResources()
-    {
+    protected String getConfigResources() {
         return "mule-config.xml";
     }
 
     @Test
-    public void testPublishFlow() throws Exception
-    {
+    public void testPublishFlow() throws Exception {
         Flow flow = lookupFlowConstruct("testMessagePublish");
         MuleEvent event = AbstractMuleTestCase.getTestEvent(null);
         MuleEvent responseEvent = flow.process(event);
@@ -29,36 +39,71 @@ public class MqttModuleTest extends FunctionalTestCase
         assertEquals("my payload", new String(((MqttMuleMessage) responseEvent.getMessage().getPayload()).getMessage().getPayload()));
     }
 
-    /**
-    * Run the flow specified by name and assert equality on the expected output
-    *
-    * @param flowName The name of the flow to run
-    * @param expect The expected output
-    */
-    protected <T> void runFlowAndExpect(String flowName, T expect) throws Exception
-    {
-        Flow flow = lookupFlowConstruct(flowName);
-        MuleEvent event = AbstractMuleTestCase.getTestEvent(null);
-        MuleEvent responseEvent = flow.process(event);
+    @Test
+    public void testSubscribeFlow() throws Exception {
 
-        assertEquals(expect, responseEvent.getMessage().getPayload());
-    }
+        final MuleEvent event = AbstractMuleTestCase.getTestEvent(null);
 
-    /**
-    * Run the flow specified by name using the specified payload and assert
-    * equality on the expected output
-    *
-    * @param flowName The name of the flow to run
-    * @param expect The expected output
-    * @param payload The payload of the input event
-    */
-    protected <T, U> void runFlowWithPayloadAndExpect(String flowName, T expect, U payload) throws Exception
-    {
-        Flow flow = lookupFlowConstruct(flowName);
-        MuleEvent event = AbstractMuleTestCase.getTestEvent(payload);
-        MuleEvent responseEvent = flow.process(event);
+        final Latch latch = new Latch();
 
-        assertEquals(expect, responseEvent.getMessage().getPayload());
+        //We need to to subscribe and publish in different threads since PubNub is not a queuing
+        //system, so messages are only received to subscribers who are actively listening
+        final Latch pubLatch = new Latch();
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                // Listen for Messages (Subscribe)
+                pubLatch.release();
+                try {
+                    mqttModule.subscribe("test/subscribe", 2, new SourceCallback() {
+                        public Object process() throws Exception {
+                            return null;  //To change body of implemented methods use File | Settings | File Templates.
+                        }
+
+                        public Object process(Object o) throws Exception {
+                            if (o instanceof MqttMuleMessage) {
+                                MqttMuleMessage message = (MqttMuleMessage) o;
+
+                                System.out.println("Received message from " + ((MqttMuleMessage) o).getTopic().getName());
+                                assertTrue(message.getTopic().getName().equals("test/subscribe"));
+
+                                System.out.println("Message: " + new String(message.getMessage().getPayload()));
+                                assertTrue(new String(message.getMessage().getPayload()).equals("this is a message"));
+                            }
+                            latch.release();
+                            return null;  //To change body of implemented methods use File | Settings | File Templates.
+                        }
+
+                        public Object process(Object o, Map<String, Object> stringObjectMap) throws Exception {
+                            return null;  //To change body of implemented methods use File | Settings | File Templates.
+                        }
+                    });
+                } catch (ConnectionException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+
+        t.start();
+        //We wait for the thread to start before publishing a message. This ensures that our
+        //subscribe is listening before the message is published
+        Assert.assertTrue("Subscriber was not registered in a separate thread", pubLatch.await(5, TimeUnit.SECONDS));
+
+        String topicName = "test/subscribe";
+        int qoh = 2;
+        String clientId = "muletest";
+
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setCleanSession(false);
+
+        MqttClient client = new MqttClient("tcp://localhost:1883", clientId);
+        client.connect(options);
+
+        MqttTopic topic = client.getTopic(topicName);
+        topic.publish("this is a message".getBytes(), qoh, false);
+
+        Assert.assertTrue("Message was not received on topic: " + topicName, latch.await(30, TimeUnit.SECONDS));
+
+        client.disconnect();
     }
 
     /**
@@ -66,8 +111,7 @@ public class MqttModuleTest extends FunctionalTestCase
      *
      * @param name Name of the flow to retrieve
      */
-    protected Flow lookupFlowConstruct(String name)
-    {
+    protected Flow lookupFlowConstruct(String name) {
         return (Flow) AbstractMuleTestCase.muleContext.getRegistry().lookupFlowConstruct(name);
     }
 }
