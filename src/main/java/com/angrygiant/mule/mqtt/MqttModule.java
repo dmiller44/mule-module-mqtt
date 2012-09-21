@@ -17,15 +17,13 @@ import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.callback.SourceCallback;
 
-import java.io.ByteArrayInputStream;
-
 /**
  * Generic module
  *
  * @author MuleSoft, Inc.
  */
 @Module(name = "mqtt", schemaVersion = "1.0-SNAPSHOT")
-public class MqttModule implements MqttCallback {
+public class MqttModule {
     private static final Logger logger = Logger.getLogger(MqttModule.class);
 
     public static final int MQTT_DEFAULT_PORT = 1883;
@@ -239,36 +237,6 @@ public class MqttModule implements MqttCallback {
         token.waitForCompletion(900000);
 
         return new MqttMuleMessage(message, topic);
-    }
-
-    /**
-     * Subscribes to a Topic using MqttClient
-     *
-     * @param callback Required Mule SourceCallback class to process message
-     * @param topic    Topic for which to listen to messages
-     * @param qos      Level of quality of service to use
-     * @return
-     */
-    public void subscribe(String topic, Integer qos, SourceCallback callback) {
-        if (qos == null || qos < 0 || qos > 2) {
-            qos = 2;
-        }
-
-        //TODO subscribe to topic and process received messages
-    }
-
-    //MQTTCallback methods
-
-    public void connectionLost(Throwable throwable) {
-        logger.error("Connection to MQTT lost: ", throwable);
-    }
-
-    public void messageArrived(MqttTopic mqttTopic, MqttMessage mqttMessage) throws Exception {
-        logger.trace("Message arrived on Topic " + mqttTopic.getName() + " with message " + new String(mqttMessage.getPayload()));
-    }
-
-    public void deliveryComplete(MqttDeliveryToken mqttDeliveryToken) {
-        logger.trace("Delivery completed");
     }
 
     //Getters and Setters
