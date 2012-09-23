@@ -7,7 +7,7 @@
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-        http://www.mulesoft.org/schema/mule/mqtt http://www.mulesoft.org/schema/mule/mqtt/1.0-SNAPSHOT/mule-mqtt.xsd">
+        http://www.mulesoft.org/schema/mule/mqtt http://www.mulesoft.org/schema/mule/mqtt/0.1/mule-mqtt.xsd">
 
     <mqtt:config brokerHostName="localhost" clientId="muleclient" cleanSession="false" />
 
