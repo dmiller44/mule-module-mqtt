@@ -164,6 +164,7 @@ public class MqttModule {
         MqttDefaultFilePersistence filePersistence = null;
         if (getPersistenceLocation() != null || StringUtils.isNotBlank(getPersistenceLocation())) {
             try {
+                logger.debug("Attempting to set up file persistence for client...");
                 filePersistence = new MqttDefaultFilePersistence(getPersistenceLocation());
             } catch (MqttPersistenceException e) {
                 logger.error("Error creating file persistence for messages...persistence will be IGNORED!!!", e);
@@ -175,8 +176,10 @@ public class MqttModule {
 
         try {
             if (filePersistence == null) {
+                logger.debug("Creating client without file persistence");
                 return new MqttClient(brokerUrl, clientId);
             } else {
+                logger.debug("Creating client with file persistence enabled");
                 return new MqttClient(brokerUrl, clientId, filePersistence);
             }
         } catch (MqttException e) {
