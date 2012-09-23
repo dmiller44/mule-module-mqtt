@@ -40,7 +40,7 @@ import org.mule.api.callback.SourceCallback;
  *
  * @author dmiller@angrygiant.com
  */
-@Module(name = "mqtt", schemaVersion = "1.0-SNAPSHOT")
+@Module(name = "mqtt", schemaVersion = "0.1")
 public class MqttModule {
     private static final Logger logger = Logger.getLogger(MqttModule.class);
 
