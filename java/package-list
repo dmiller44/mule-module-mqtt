@@ -1,0 +1,6 @@
+com.angrygiant.mule.mqtt
+com.angrygiant.mule.mqtt.adapters
+com.angrygiant.mule.mqtt.config
+com.angrygiant.mule.mqtt.processors
+com.angrygiant.mule.mqtt.sources
+

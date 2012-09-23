@@ -1,0 +1,1747 @@
+<api>
+<package name="com.angrygiant.mule.mqtt"
+>
+<class name="MqttModule"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MqttModule"
+ type="com.angrygiant.mule.mqtt.MqttModule"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getBrokerHostName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getBrokerPort"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getClientId"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getConnectionTimeout"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getKeepAliveInterval"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLwtMessage"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLwtQos"
+ return="int"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getLwtTopicName"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getPassword"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getPersistenceLocation"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getSubscriptionDelay"
+ return="long"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getUsername"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="initialize"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="ConnectionException" type="org.mule.api.ConnectionException">
+</exception>
+</method>
+<method name="isCleanSession"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="isLwtRetained"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="publish"
+ return="com.angrygiant.mule.mqtt.MqttMuleMessage"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="topicName" type="java.lang.String">
+</parameter>
+<parameter name="payload" type="java.lang.String">
+</parameter>
+<parameter name="qos" type="int">
+</parameter>
+<exception name="MqttException" type="org.eclipse.paho.client.mqttv3.MqttException">
+</exception>
+</method>
+<method name="setBrokerHostName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="brokerHostName" type="java.lang.String">
+</parameter>
+</method>
+<method name="setBrokerPort"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="brokerPort" type="int">
+</parameter>
+</method>
+<method name="setCleanSession"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="cleanSession" type="boolean">
+</parameter>
+</method>
+<method name="setClientId"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="clientId" type="java.lang.String">
+</parameter>
+</method>
+<method name="setConnectionTimeout"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="connectionTimeout" type="int">
+</parameter>
+</method>
+<method name="setKeepAliveInterval"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="keepAliveInterval" type="int">
+</parameter>
+</method>
+<method name="setLwtMessage"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="lwtMessage" type="java.lang.String">
+</parameter>
+</method>
+<method name="setLwtQos"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="lwtQos" type="int">
+</parameter>
+</method>
+<method name="setLwtRetained"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="lwtRetained" type="boolean">
+</parameter>
+</method>
+<method name="setLwtTopicName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="lwtTopicName" type="java.lang.String">
+</parameter>
+</method>
+<method name="setPassword"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="password" type="java.lang.String">
+</parameter>
+</method>
+<method name="setPersistenceLocation"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="persistenceLocation" type="java.lang.String">
+</parameter>
+</method>
+<method name="setSubscriptionDelay"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="subscriptionDelay" type="long">
+</parameter>
+</method>
+<method name="setUsername"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="username" type="java.lang.String">
+</parameter>
+</method>
+<method name="stopConnector"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="MqttException" type="org.eclipse.paho.client.mqttv3.MqttException">
+</exception>
+</method>
+<method name="subscribe"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="topicName" type="java.lang.String">
+</parameter>
+<parameter name="qos" type="int">
+</parameter>
+<parameter name="callback" type="org.mule.api.callback.SourceCallback">
+</parameter>
+<exception name="ConnectionException" type="org.mule.api.ConnectionException">
+</exception>
+</method>
+<field name="MQTT_DEFAULT_HOST"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;localhost&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MQTT_DEFAULT_PORT"
+ type="int"
+ transient="false"
+ volatile="false"
+ value="1883"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="brokerHostName"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="brokerPort"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="cleanSession"
+ type="boolean"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="client"
+ type="org.eclipse.paho.client.mqttv3.MqttClient"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="clientId"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="connectOptions"
+ type="org.eclipse.paho.client.mqttv3.MqttConnectOptions"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="connectionTimeout"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="keepAliveInterval"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="logger"
+ type="org.apache.log4j.Logger"
+ transient="false"
+ volatile="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="lwtMessage"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="lwtQos"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="lwtRetained"
+ type="boolean"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="lwtTopicName"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="password"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="persistenceLocation"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="subscriptionDelay"
+ type="long"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="username"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+<class name="MqttMuleMessage"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MqttMuleMessage"
+ type="com.angrygiant.mule.mqtt.MqttMuleMessage"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="message" type="org.eclipse.paho.client.mqttv3.MqttMessage">
+</parameter>
+<parameter name="topic" type="org.eclipse.paho.client.mqttv3.MqttTopic">
+</parameter>
+</constructor>
+<method name="getMessage"
+ return="org.eclipse.paho.client.mqttv3.MqttMessage"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="getTopic"
+ return="org.eclipse.paho.client.mqttv3.MqttTopic"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<field name="message"
+ type="org.eclipse.paho.client.mqttv3.MqttMessage"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="topic"
+ type="org.eclipse.paho.client.mqttv3.MqttTopic"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+<class name="MqttTopicListener"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.eclipse.paho.client.mqttv3.MqttCallback">
+</implements>
+<constructor name="MqttTopicListener"
+ type="com.angrygiant.mule.mqtt.MqttTopicListener"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="client" type="org.eclipse.paho.client.mqttv3.MqttClient">
+</parameter>
+<parameter name="callback" type="org.mule.api.callback.SourceCallback">
+</parameter>
+<parameter name="topicName" type="java.lang.String">
+</parameter>
+<parameter name="connectOptions" type="org.eclipse.paho.client.mqttv3.MqttConnectOptions">
+</parameter>
+<parameter name="subscriptionDelay" type="long">
+</parameter>
+</constructor>
+<constructor name="MqttTopicListener"
+ type="com.angrygiant.mule.mqtt.MqttTopicListener"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="client" type="org.eclipse.paho.client.mqttv3.MqttClient">
+</parameter>
+<parameter name="callback" type="org.mule.api.callback.SourceCallback">
+</parameter>
+<parameter name="topicName" type="java.lang.String">
+</parameter>
+<parameter name="connectOptions" type="org.eclipse.paho.client.mqttv3.MqttConnectOptions">
+</parameter>
+<parameter name="subscriptionDelay" type="long">
+</parameter>
+<parameter name="qos" type="int">
+</parameter>
+</constructor>
+<method name="connectionLost"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="throwable" type="java.lang.Throwable">
+</parameter>
+</method>
+<method name="deliveryComplete"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="mqttDeliveryToken" type="org.eclipse.paho.client.mqttv3.MqttDeliveryToken">
+</parameter>
+</method>
+<method name="messageArrived"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="mqttTopic" type="org.eclipse.paho.client.mqttv3.MqttTopic">
+</parameter>
+<parameter name="mqttMessage" type="org.eclipse.paho.client.mqttv3.MqttMessage">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+<field name="callback"
+ type="org.mule.api.callback.SourceCallback"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="client"
+ type="org.eclipse.paho.client.mqttv3.MqttClient"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="connectOptions"
+ type="org.eclipse.paho.client.mqttv3.MqttConnectOptions"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="logger"
+ type="org.apache.log4j.Logger"
+ transient="false"
+ volatile="false"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="qos"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="subscriptionDelay"
+ type="long"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="topicName"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+</package>
+<package name="com.angrygiant.mule.mqtt.adapters"
+>
+<class name="MqttModuleCapabilitiesAdapter"
+ extends="com.angrygiant.mule.mqtt.MqttModule"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MqttModuleCapabilitiesAdapter"
+ type="com.angrygiant.mule.mqtt.adapters.MqttModuleCapabilitiesAdapter"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="isCapableOf"
+ return="boolean"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="capability" type="org.mule.api.Capability">
+</parameter>
+</method>
+</class>
+<class name="MqttModuleLifecycleAdapter"
+ extends="com.angrygiant.mule.mqtt.adapters.MqttModuleCapabilitiesAdapter"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.mule.api.lifecycle.Initialisable">
+</implements>
+<constructor name="MqttModuleLifecycleAdapter"
+ type="com.angrygiant.mule.mqtt.adapters.MqttModuleLifecycleAdapter"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="dispose"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="initialise"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="start"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="DefaultMuleException" type="org.mule.api.DefaultMuleException">
+</exception>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+<method name="stop"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="DefaultMuleException" type="org.mule.api.DefaultMuleException">
+</exception>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+</class>
+</package>
+<package name="com.angrygiant.mule.mqtt.config"
+>
+<class name="MqttModuleConfigDefinitionParser"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.springframework.beans.factory.xml.BeanDefinitionParser">
+</implements>
+<constructor name="MqttModuleConfigDefinitionParser"
+ type="com.angrygiant.mule.mqtt.config.MqttModuleConfigDefinitionParser"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="parse"
+ return="org.springframework.beans.factory.config.BeanDefinition"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="element" type="org.w3c.dom.Element">
+</parameter>
+<parameter name="parserContent" type="org.springframework.beans.factory.xml.ParserContext">
+</parameter>
+</method>
+<field name="patternInfo"
+ type="org.mule.util.TemplateParser.PatternInfo"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+<class name="MqttModuleNamespaceHandler"
+ extends="org.springframework.beans.factory.xml.NamespaceHandlerSupport"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MqttModuleNamespaceHandler"
+ type="com.angrygiant.mule.mqtt.config.MqttModuleNamespaceHandler"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="init"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+</class>
+<class name="PublishDefinitionParser"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.springframework.beans.factory.xml.BeanDefinitionParser">
+</implements>
+<constructor name="PublishDefinitionParser"
+ type="com.angrygiant.mule.mqtt.config.PublishDefinitionParser"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getAttributeValue"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+<parameter name="element" type="org.w3c.dom.Element">
+</parameter>
+<parameter name="attributeName" type="java.lang.String">
+</parameter>
+</method>
+<method name="parse"
+ return="org.springframework.beans.factory.config.BeanDefinition"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="element" type="org.w3c.dom.Element">
+</parameter>
+<parameter name="parserContent" type="org.springframework.beans.factory.xml.ParserContext">
+</parameter>
+</method>
+<field name="patternInfo"
+ type="org.mule.util.TemplateParser.PatternInfo"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+<class name="SubscribeDefinitionParser"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.springframework.beans.factory.xml.BeanDefinitionParser">
+</implements>
+<constructor name="SubscribeDefinitionParser"
+ type="com.angrygiant.mule.mqtt.config.SubscribeDefinitionParser"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="getAttributeValue"
+ return="java.lang.String"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+<parameter name="element" type="org.w3c.dom.Element">
+</parameter>
+<parameter name="attributeName" type="java.lang.String">
+</parameter>
+</method>
+<method name="parse"
+ return="org.springframework.beans.factory.config.BeanDefinition"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="element" type="org.w3c.dom.Element">
+</parameter>
+<parameter name="parserContent" type="org.springframework.beans.factory.xml.ParserContext">
+</parameter>
+</method>
+<field name="patternInfo"
+ type="org.mule.util.TemplateParser.PatternInfo"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+</package>
+<package name="com.angrygiant.mule.mqtt.processors"
+>
+<class name="PublishMessageProcessor"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.mule.api.lifecycle.Initialisable">
+</implements>
+<implements name="org.mule.api.processor.MessageProcessor">
+</implements>
+<constructor name="PublishMessageProcessor"
+ type="com.angrygiant.mule.mqtt.processors.PublishMessageProcessor"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="dispose"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="initialise"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="InitialisationException" type="org.mule.api.lifecycle.InitialisationException">
+</exception>
+</method>
+<method name="process"
+ return="org.mule.api.MuleEvent"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="event" type="org.mule.api.MuleEvent">
+</parameter>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+<method name="setFlowConstruct"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="flowConstruct" type="org.mule.api.construct.FlowConstruct">
+</parameter>
+</method>
+<method name="setModuleObject"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="moduleObject" type="java.lang.Object">
+</parameter>
+</method>
+<method name="setMuleContext"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="context" type="org.mule.api.MuleContext">
+</parameter>
+</method>
+<method name="setPayload"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
+<method name="setQos"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
+<method name="setRetryMax"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="int">
+</parameter>
+</method>
+<method name="setTopicName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
+<method name="start"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+<method name="stop"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+<field name="_payloadType"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="_qosType"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="_topicNameType"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="expressionManager"
+ type="org.mule.api.expression.ExpressionManager"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="flowConstruct"
+ type="org.mule.api.construct.FlowConstruct"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="logger"
+ type="org.slf4j.Logger"
+ transient="false"
+ volatile="false"
+ static="true"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="moduleObject"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="muleContext"
+ type="org.mule.api.MuleContext"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="patternInfo"
+ type="org.mule.util.TemplateParser.PatternInfo"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="payload"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="qos"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="retryCount"
+ type="java.util.concurrent.atomic.AtomicInteger"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="retryMax"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="topicName"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+</package>
+<package name="com.angrygiant.mule.mqtt.sources"
+>
+<class name="SubscribeMessageSource"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="org.mule.api.lifecycle.Initialisable">
+</implements>
+<implements name="org.mule.api.source.MessageSource">
+</implements>
+<implements name="java.lang.Runnable">
+</implements>
+<implements name="org.mule.api.callback.SourceCallback">
+</implements>
+<constructor name="SubscribeMessageSource"
+ type="com.angrygiant.mule.mqtt.sources.SubscribeMessageSource"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="initialise"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="InitialisationException" type="org.mule.api.lifecycle.InitialisationException">
+</exception>
+</method>
+<method name="process"
+ return="java.lang.Object"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="message" type="java.lang.Object">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+<method name="process"
+ return="java.lang.Object"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="message" type="java.lang.Object">
+</parameter>
+<parameter name="properties" type="java.util.Map&lt;java.lang.String, java.lang.Object&gt;">
+</parameter>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+<method name="process"
+ return="java.lang.Object"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="Exception" type="java.lang.Exception">
+</exception>
+</method>
+<method name="run"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="setFlowConstruct"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="flowConstruct" type="org.mule.api.construct.FlowConstruct">
+</parameter>
+</method>
+<method name="setListener"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="listener" type="org.mule.api.processor.MessageProcessor">
+</parameter>
+</method>
+<method name="setModuleObject"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="moduleObject" type="java.lang.Object">
+</parameter>
+</method>
+<method name="setMuleContext"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="context" type="org.mule.api.MuleContext">
+</parameter>
+</method>
+<method name="setQos"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
+<method name="setTopicName"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
+<method name="start"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+<method name="stop"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="MuleException" type="org.mule.api.MuleException">
+</exception>
+</method>
+<field name="_qosType"
+ type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="_topicNameType"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="flowConstruct"
+ type="org.mule.api.construct.FlowConstruct"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="messageProcessor"
+ type="org.mule.api.processor.MessageProcessor"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="moduleObject"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="muleContext"
+ type="org.mule.api.MuleContext"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="qos"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="thread"
+ type="java.lang.Thread"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="topicName"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+</class>
+</package>
+</api>
