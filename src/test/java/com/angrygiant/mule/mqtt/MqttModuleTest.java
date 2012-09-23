@@ -180,6 +180,77 @@ public class MqttModuleTest extends FunctionalTestCase {
         client.disconnect();
     }
 
+    @Test
+        public void testSubscribeFlowWithBadPersistence() throws Exception {
+
+            final MuleEvent event = AbstractMuleTestCase.getTestEvent(null);
+
+            final Latch latch = new Latch();
+
+            //We need to to subscribe and publish in different threads since PubNub is not a queuing
+            //system, so messages are only received to subscribers who are actively listening
+            final Latch pubLatch = new Latch();
+            Thread t = new Thread(new Runnable() {
+                public void run() {
+                    // Listen for Messages (Subscribe)
+                    pubLatch.release();
+                    try {
+                        mqttModule.setPersistenceLocation("/foobar/");
+
+                        mqttModule.subscribe("test/persistence", 2, new SourceCallback() {
+                            public Object process() throws Exception {
+                                latch.release();
+                                throw new NotImplementedException("This process has not been implemented!!!");
+                            }
+
+                            public Object process(Object o) throws Exception {
+                                if (o instanceof MqttMuleMessage) {
+                                    MqttMuleMessage message = (MqttMuleMessage) o;
+
+                                    System.out.println("Received message from " + ((MqttMuleMessage) o).getTopic().getName());
+                                    assertTrue(message.getTopic().getName().equals("test/persistence"));
+
+                                    System.out.println("Message: " + new String(message.getMessage().getPayload()));
+                                    assertTrue(new String(message.getMessage().getPayload()).equals("this is a message"));
+                                }
+                                latch.release();
+                                return null;  //To change body of implemented methods use File | Settings | File Templates.
+                            }
+
+                            public Object process(Object o, Map<String, Object> stringObjectMap) throws Exception {
+                                latch.release();
+                                throw new NotImplementedException("This process has not been implemented!!!");
+                            }
+                        });
+                    } catch (ConnectionException e) {
+                        latch.release();
+                    }
+                }
+            });
+
+            t.start();
+            //We wait for the thread to start before publishing a message. This ensures that our
+            //subscribe is listening before the message is published
+            Assert.assertTrue("Subscriber was not registered in a separate thread", pubLatch.await(5, TimeUnit.SECONDS));
+
+            String topicName = "test/persistence";
+            int qoh = 2;
+            String clientId = "muletest";
+
+            MqttConnectOptions options = new MqttConnectOptions();
+            options.setCleanSession(false);
+
+            MqttClient client = new MqttClient("tcp://localhost:1883", clientId);
+            client.connect(options);
+
+            MqttTopic topic = client.getTopic(topicName);
+            topic.publish("this is a message".getBytes(), qoh, false);
+
+            Assert.assertTrue("Message was not received on topic: " + topicName, latch.await(30, TimeUnit.SECONDS));
+
+            client.disconnect();
+        }
+
     /**
      * Retrieve a flow by name from the registry
      *
