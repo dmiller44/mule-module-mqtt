@@ -18,9 +18,6 @@ import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.callback.SourceCallback;
 
-import java.util.Date;
-import java.util.Random;
-
 /**
  * Generic module
  *
@@ -83,7 +80,7 @@ public class MqttModule {
     @Configurable
     @Optional
     @Default("30")
-    private int connectionTimeout;
+    private int connectionTimeout = 30;
 
     /**
      * Last Will and Testimate Topic - refer to Eclipse Paho documentation
@@ -121,7 +118,7 @@ public class MqttModule {
     @Configurable
     @Optional
     @Default("60")
-    private int keepAliveInterval;
+    private int keepAliveInterval = 60;
 
     /**
      * File Persistence Location - directory on the machine where message persistence can be stored to disk.
@@ -129,6 +126,14 @@ public class MqttModule {
     @Configurable
     @Optional
     private String persistenceLocation;
+
+    /**
+     * Milliseconds of delay before subscription to a topic occurs.  Gives the client time to connect.
+     */
+    @Configurable
+    @Optional
+    @Default("500")
+    private long subscriptionDelay;
 
     /**
      * Private variables not used by Mule directly
@@ -145,6 +150,14 @@ public class MqttModule {
         this.client = connectClient(getClientId());
     }
 
+    /**
+     * Convenience method that connects to a given MQTT broker.  Returns the MqttClient object
+     * for later use with publish and subscribe.
+     *
+     * @param clientId
+     * @return MqttClient
+     * @throws ConnectionException
+     */
     private MqttClient connectClient(String clientId) throws ConnectionException{
         String brokerUrl = "tcp://" + getBrokerHostName() + ":" + getBrokerPort();
 
@@ -172,6 +185,10 @@ public class MqttModule {
         }
     }
 
+    /**
+     * Method that sets up the MqttConnectOptions class for use.  This reads the settings given via
+     * the mqtt:config element.
+     */
     private void setupConnectOptions() {
         connectOptions.setCleanSession(isCleanSession());
         connectOptions.setConnectionTimeout(getConnectionTimeout());
@@ -267,12 +284,18 @@ public class MqttModule {
         MqttClient subscriberClient = connectClient(subscriberId);
 
         try {
-            subscriberClient.setCallback(new MqttTopicListener(subscriberClient, callback, topicName, qos));
+            subscriberClient.setCallback(new MqttTopicListener(subscriberClient, callback, topicName, connectOptions, getSubscriptionDelay(), qos));
             subscriberClient.connect(connectOptions);
+
+            Thread.sleep(getSubscriptionDelay());
+
             subscriberClient.subscribe(topicName, qos);
         } catch (MqttException e) {
             logger.error("MQTT Exceptions occurred subscribing", e);
             throw new ConnectionException(ConnectionExceptionCode.UNKNOWN, null, "Subscription Error", e);
+        } catch (InterruptedException ie) {
+            logger.error("Interrupt exception occurred sleeping before subscribing...");
+            throw new ConnectionException(ConnectionExceptionCode.UNKNOWN, null, "Interrupt Error", ie);
         }
 
         logger.info("Done subscribing to topic " + topicName);
@@ -382,5 +405,13 @@ public class MqttModule {
 
     public void setLwtRetained(boolean lwtRetained) {
         this.lwtRetained = lwtRetained;
+    }
+
+    public long getSubscriptionDelay() {
+        return subscriptionDelay;
+    }
+
+    public void setSubscriptionDelay(long subscriptionDelay) {
+        this.subscriptionDelay = subscriptionDelay;
     }
 }
