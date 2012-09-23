@@ -1,6 +1,6 @@
 <!-- BEGIN_INCLUDE(mqtt:publish) -->
-//example here
+<mqtt:publish topicName="test/publish" message="my message as a string" qos="1" />
 <!-- END_INCLUDE(mqtt:publish) -->
 <!-- BEGIN_INCLUDE(mqtt:subscribe) -->
-//example here
+<mqtt:subscribe topicName="test/subscribe" qos="0" />
 <!-- END_INCLUDE(mqtt:subscribe) -->
