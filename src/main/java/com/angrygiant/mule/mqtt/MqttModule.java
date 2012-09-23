@@ -19,9 +19,26 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.api.callback.SourceCallback;
 
 /**
- * Generic module
+ * Mule MQTT Module
+ * <p/>
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * <p/>
+ * <p>
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.md file.
+ * </p>
+ * <p>
+ * Created with IntelliJ IDEA.
+ * User: dmiller@angrygiant.com
+ * Date: 9/21/12
+ * Time: 9:57 AM
+ * </p>
+ * <p>
+ * Module definition for publishing and subscribing to a given MQTT broker server.
+ * </p>
  *
- * @author MuleSoft, Inc.
+ * @author dmiller@angrygiant.com
  */
 @Module(name = "mqtt", schemaVersion = "1.0-SNAPSHOT")
 public class MqttModule {

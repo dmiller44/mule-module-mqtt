@@ -5,13 +5,26 @@ import org.eclipse.paho.client.mqttv3.*;
 import org.mule.api.callback.SourceCallback;
 
 /**
+ * Mule MQTT Module
+ * <p/>
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * <p/>
+ * <p>
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.md file.
+ * </p>
+ * <p>
  * Created with IntelliJ IDEA.
- * User: dmiller
+ * User: dmiller@angrygiant.com
  * Date: 9/21/12
- * Time: 2:39 PM
- *
+ * Time: 9:57 AM
+ * </p>
+ * <p>
  * TopicListener is responsible for initiating and holding a connection to the MQTT broker for topic subscription.
+ * </p>
  *
+ * @author dmiller@angrygiant.com
  */
 public class MqttTopicListener implements MqttCallback {
     private static final Logger logger = Logger.getLogger(MqttTopicListener.class);
