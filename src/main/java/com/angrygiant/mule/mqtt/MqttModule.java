@@ -19,6 +19,7 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.OutboundHeaders;
 import org.mule.api.callback.SourceCallback;
 
+import javax.annotation.PreDestroy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -179,7 +180,7 @@ public class MqttModule {
      * @return MqttClient
      * @throws ConnectionException
      */
-    private MqttClient connectClient(String clientId) throws ConnectionException{
+    private MqttClient connectClient(String clientId) throws ConnectionException {
         String brokerUrl = "tcp://" + getBrokerHostName() + ":" + getBrokerPort();
 
         MqttDefaultFilePersistence filePersistence = null;
@@ -247,14 +248,30 @@ public class MqttModule {
     }
 
     /**
+     * Stop the client prior to destruction
+     *
+     * @throws MqttException
+     */
+    @PreDestroy
+    public void destroy() throws MqttException {
+        if (this.client.isConnected()) {
+            logger.info("Diconnecting from MQTT broker...");
+            this.client.disconnect();
+        }
+
+        this.client = null;
+        this.connectOptions = null;
+    }
+
+    /**
      * Publish processor - used to publish a message to a given topic on the MQTT broker.
      * <p/>
      * <p/>
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:publish}
      *
-     * @param topicName topic to publish message to
-     * @param payload   payload to publish message to
-     * @param qos       qos level to use when publishing message
+     * @param topicName       topic to publish message to
+     * @param payload         payload to publish message to
+     * @param qos             qos level to use when publishing message
      * @param outboundHeaders injected outbound headers map so we can set them prior to leaving
      * @return MqttMuleMessage instance
      */
@@ -301,16 +318,16 @@ public class MqttModule {
     }
 
     /**
-         * Publish processor - used to publish a message to a given topic on the MQTT broker.
-         * <p/>
-         * <p/>
-         * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:subscribe}
-         *
-         * @param topicName topic to publish message to
-         * @param qos       qos level to use when publishing message
-         * @param callback       qos level to use when publishing message
-         * @return
-         */
+     * Publish processor - used to publish a message to a given topic on the MQTT broker.
+     * <p/>
+     * <p/>
+     * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:subscribe}
+     *
+     * @param topicName topic to publish message to
+     * @param qos       qos level to use when publishing message
+     * @param callback  qos level to use when publishing message
+     * @return
+     */
     @Source
     public void subscribe(String topicName, @Optional @Default("2") int qos, final SourceCallback callback) throws ConnectionException {
         logger.info("Creating new client for topic subscription");
