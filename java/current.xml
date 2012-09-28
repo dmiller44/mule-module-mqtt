@@ -185,7 +185,7 @@
 >
 </method>
 <method name="publish"
- return="com.angrygiant.mule.mqtt.MqttMuleMessage"
+ return="byte[]"
  abstract="false"
  native="false"
  synchronized="false"
@@ -199,6 +199,8 @@
 <parameter name="payload" type="java.lang.String">
 </parameter>
 <parameter name="qos" type="int">
+</parameter>
+<parameter name="outboundHeaders" type="java.util.Map&lt;java.lang.String, java.lang.Object&gt;">
 </parameter>
 <exception name="MqttException" type="org.eclipse.paho.client.mqttv3.MqttException">
 </exception>
@@ -610,69 +612,6 @@
 >
 </field>
 </class>
-<class name="MqttMuleMessage"
- extends="java.lang.Object"
- abstract="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<constructor name="MqttMuleMessage"
- type="com.angrygiant.mule.mqtt.MqttMuleMessage"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="message" type="org.eclipse.paho.client.mqttv3.MqttMessage">
-</parameter>
-<parameter name="topic" type="org.eclipse.paho.client.mqttv3.MqttTopic">
-</parameter>
-</constructor>
-<method name="getMessage"
- return="org.eclipse.paho.client.mqttv3.MqttMessage"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<method name="getTopic"
- return="org.eclipse.paho.client.mqttv3.MqttTopic"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-</method>
-<field name="message"
- type="org.eclipse.paho.client.mqttv3.MqttMessage"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="private"
->
-</field>
-<field name="topic"
- type="org.eclipse.paho.client.mqttv3.MqttTopic"
- transient="false"
- volatile="false"
- static="false"
- final="true"
- deprecated="not deprecated"
- visibility="private"
->
-</field>
-</class>
 <class name="MqttTopicListener"
  extends="java.lang.Object"
  abstract="false"
@@ -764,6 +703,72 @@
 <exception name="Exception" type="java.lang.Exception">
 </exception>
 </method>
+<field name="CLIENT_ID"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;mqtt.client.id&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="CLIENT_URI"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;mqtt.client.serverUri&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_DUPLICATE"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;mqtt.message.duplicated&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_QOS"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;mqtt.message.qos&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="MESSAGE_RETAIN"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;mqtt.message.retained&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
+<field name="TOPIC_NAME"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ value="&quot;mqtt.topic.name&quot;"
+ static="true"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</field>
 <field name="callback"
  type="org.mule.api.callback.SourceCallback"
  transient="false"
@@ -1233,6 +1238,19 @@
 <parameter name="context" type="org.mule.api.MuleContext">
 </parameter>
 </method>
+<method name="setOutboundHeaders"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
 <method name="setPayload"
  return="void"
  abstract="false"
@@ -1311,6 +1329,16 @@
 <exception name="MuleException" type="org.mule.api.MuleException">
 </exception>
 </method>
+<field name="_outboundHeadersType"
+ type="java.util.Map"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
 <field name="_payloadType"
  type="java.lang.String"
  transient="false"
@@ -1383,6 +1411,16 @@
 </field>
 <field name="muleContext"
  type="org.mule.api.MuleContext"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="outboundHeaders"
+ type="java.lang.Object"
  transient="false"
  volatile="false"
  static="false"

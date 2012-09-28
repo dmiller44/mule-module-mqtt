@@ -1,5 +1,5 @@
 var NAVTREE_DATA =
-[ [ "com.angrygiant.mule.mqtt", "com/angrygiant/mule/mqtt/package-summary.html", [ [ "Classes", null, [ [ "MqttModule", "com/angrygiant/mule/mqtt/MqttModule.html", null, "" ], [ "MqttMuleMessage", "com/angrygiant/mule/mqtt/MqttMuleMessage.html", null, "" ], [ "MqttTopicListener", "com/angrygiant/mule/mqtt/MqttTopicListener.html", null, "" ] ]
+[ [ "com.angrygiant.mule.mqtt", "com/angrygiant/mule/mqtt/package-summary.html", [ [ "Classes", null, [ [ "MqttModule", "com/angrygiant/mule/mqtt/MqttModule.html", null, "" ], [ "MqttTopicListener", "com/angrygiant/mule/mqtt/MqttTopicListener.html", null, "" ] ]
 , "" ] ]
 , "" ], [ "com.angrygiant.mule.mqtt.adapters", "com/angrygiant/mule/mqtt/adapters/package-summary.html", [ [ "Classes", null, [ [ "MqttModuleCapabilitiesAdapter", "com/angrygiant/mule/mqtt/adapters/MqttModuleCapabilitiesAdapter.html", null, "" ], [ "MqttModuleLifecycleAdapter", "com/angrygiant/mule/mqtt/adapters/MqttModuleLifecycleAdapter.html", null, "" ] ]
 , "" ] ]
