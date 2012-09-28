@@ -202,6 +202,19 @@ public class MqttModule {
 
         setupConnectOptions();
 
+        try {
+            if (filePersistence == null) {
+                logger.debug("Creating client without file persistence");
+                this.client = new MqttClient(brokerUrl, clientId);
+            } else {
+                logger.debug("Creating client with file persistence enabled");
+                this.client = new MqttClient(brokerUrl, clientId, filePersistence);
+            }
+        } catch (MqttException e) {
+            logger.error("Error creating client to MQTT broker:", e);
+            throw new ConnectionException(ConnectionExceptionCode.UNKNOWN, null, "Mule has issues with the MQTT client", e);
+        }
+
         if (StringUtils.isNotBlank(this.getLwtTopicName())) {
             logger.debug("Setting up last will information...");
             MqttTopic lwtTopic = this.client.getTopic(this.getLwtTopicName());
@@ -209,18 +222,7 @@ public class MqttModule {
             this.connectOptions.setWill(lwtTopic, this.getLwtMessage().getBytes(), this.getLwtQos(), false);
         }
 
-        try {
-            if (filePersistence == null) {
-                logger.debug("Creating client without file persistence");
-                return new MqttClient(brokerUrl, clientId);
-            } else {
-                logger.debug("Creating client with file persistence enabled");
-                return new MqttClient(brokerUrl, clientId, filePersistence);
-            }
-        } catch (MqttException e) {
-            logger.error("Error creating client to MQTT broker:", e);
-            throw new ConnectionException(ConnectionExceptionCode.UNKNOWN, null, "Mule has issues with the MQTT client", e);
-        }
+        return this.client;
     }
 
     /**
