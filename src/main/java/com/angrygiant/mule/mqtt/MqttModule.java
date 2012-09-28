@@ -170,6 +170,12 @@ public class MqttModule {
     @Start
     public void initialize() throws ConnectionException {
         this.client = connectClient(getClientId());
+
+        try {
+            this.client.disconnect();
+        } catch (MqttException e) {
+            logger.debug("ERROR: Pre-emptive disconnect created an error", e);
+        }
     }
 
     /**
@@ -238,22 +244,6 @@ public class MqttModule {
      */
     @Stop
     public void stopConnector() throws MqttException {
-        if (this.client.isConnected()) {
-            logger.info("Diconnecting from MQTT broker...");
-            this.client.disconnect();
-        }
-
-        this.client = null;
-        this.connectOptions = null;
-    }
-
-    /**
-     * Stop the client prior to destruction
-     *
-     * @throws MqttException
-     */
-    @PreDestroy
-    public void destroy() throws MqttException {
         if (this.client.isConnected()) {
             logger.info("Diconnecting from MQTT broker...");
             this.client.disconnect();
@@ -335,6 +325,12 @@ public class MqttModule {
         String subscriberId = "mulesubscriber" + timestamp;
 
         MqttClient subscriberClient = connectClient(subscriberId);
+
+        try {
+            subscriberClient.disconnect();
+        } catch (MqttException e) {
+            logger.warn("Pre-emptive disconnect called before subscription, errors occurred: " + e);
+        }
 
         try {
             subscriberClient.setCallback(new MqttTopicListener(subscriberClient, callback, topicName, connectOptions, getSubscriptionDelay(), qos));

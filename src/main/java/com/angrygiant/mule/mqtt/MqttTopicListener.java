@@ -73,6 +73,9 @@ public class MqttTopicListener implements MqttCallback {
 
         if (!client.isConnected()) {
             try {
+                logger.debug("Sending disconnect for client...");
+                client.disconnect();
+
                 logger.debug("Setting callback method to myself...");
                 client.setCallback(this);
 
