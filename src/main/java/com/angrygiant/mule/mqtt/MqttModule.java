@@ -202,6 +202,13 @@ public class MqttModule {
 
         setupConnectOptions();
 
+        if (StringUtils.isNotBlank(this.getLwtTopicName())) {
+            logger.debug("Setting up last will information...");
+            MqttTopic lwtTopic = this.client.getTopic(this.getLwtTopicName());
+
+            this.connectOptions.setWill(lwtTopic, this.getLwtMessage().getBytes(), this.getLwtQos(), false);
+        }
+
         try {
             if (filePersistence == null) {
                 logger.debug("Creating client without file persistence");
@@ -230,11 +237,6 @@ public class MqttModule {
         }
 
         connectOptions.setUserName(getUsername());
-
-        //lwt
-        if (StringUtils.isNotBlank(getLwtTopicName())) {
-            logger.warn("FEATURE NOT YET IMPLEMENTED! Last Will and Testament will be ignored");
-        }
     }
 
     /**
