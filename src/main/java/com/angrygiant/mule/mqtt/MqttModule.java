@@ -16,7 +16,11 @@ import org.mule.api.annotations.lifecycle.Start;
 import org.mule.api.annotations.lifecycle.Stop;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.annotations.param.OutboundHeaders;
 import org.mule.api.callback.SourceCallback;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Mule MQTT Module
@@ -251,10 +255,11 @@ public class MqttModule {
      * @param topicName topic to publish message to
      * @param payload   payload to publish message to
      * @param qos       qos level to use when publishing message
+     * @param outboundHeaders injected outbound headers map so we can set them prior to leaving
      * @return MqttMuleMessage instance
      */
     @Processor
-    public MqttMuleMessage publish(String topicName, String payload, @Optional @Default("2") int qos) throws MqttException {
+    public byte[] publish(String topicName, String payload, @Optional @Default("2") int qos, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException {
         logger.debug("Connecting to Broker...");
         if (!this.client.isConnected()) {
             this.client.connect();
@@ -281,7 +286,18 @@ public class MqttModule {
         logger.trace("Waiting for default timeout of 5minutes...");
         token.waitForCompletion(900000);
 
-        return new MqttMuleMessage(message, topic);
+        if (outboundHeaders == null) {
+            outboundHeaders = new HashMap<String, Object>();
+        }
+
+        outboundHeaders.put(MqttTopicListener.TOPIC_NAME, topic.getName());
+        outboundHeaders.put(MqttTopicListener.MESSAGE_DUPLICATE, message.isDuplicate());
+        outboundHeaders.put(MqttTopicListener.MESSAGE_RETAIN, message.isRetained());
+        outboundHeaders.put(MqttTopicListener.MESSAGE_QOS, message.getQos());
+        outboundHeaders.put(MqttTopicListener.CLIENT_ID, this.client.getClientId());
+        outboundHeaders.put(MqttTopicListener.CLIENT_URI, this.client.getServerURI());
+
+        return message.getPayload();
     }
 
     /**
