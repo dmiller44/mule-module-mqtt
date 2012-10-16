@@ -269,7 +269,7 @@ public class MqttModule {
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:publish}
      *
      * @param topicName       topic to publish message to
-     * @param message         payload to publish message to (if blank/null, uses messagePayload)
+     * @param message         string message to publish (if blank/null, uses messagePayload)
      * @param qos             qos level to use when publishing message
      * @param messagePayload  injects passed payload into this object (for possible use)
      * @param outboundHeaders injected outbound headers map so we can set them prior to leaving
