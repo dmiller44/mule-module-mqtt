@@ -276,7 +276,7 @@ public class MqttModule {
      * @return MqttMuleMessage instance
      */
     @Processor
-    public byte[] publish(String topicName, String payload, @Optional @Default("2") int qos, @Payload Object messagePayload, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException, IOException {
+    public byte[] publish(String topicName, String payload, @Optional @Default("1") int qos, @Payload Object messagePayload, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException, IOException {
         byte[] payloadBytes;
 
         logger.debug("Connecting to Broker...");
