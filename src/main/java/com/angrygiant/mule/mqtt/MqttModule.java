@@ -273,7 +273,7 @@ public class MqttModule {
      * @param qos             qos level to use when publishing message
      * @param messagePayload  injects passed payload into this object (for possible use)
      * @param outboundHeaders injected outbound headers map so we can set them prior to leaving
-     * @return MqttMuleMessage instance
+     * @return delivered byte[] payload of MqttMessage
      */
     @Processor
     public byte[] publish(String topicName, String message, @Optional @Default("1") int qos, @Payload Object messagePayload, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException, IOException {
