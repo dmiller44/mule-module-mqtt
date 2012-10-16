@@ -318,17 +318,37 @@ public class MqttModule {
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:subscribe}
      *
      * @param topicName topic to publish message to
+     * @param filter topic filter string, comma delimited if multiple (takes precedence over topic name)
      * @param qos       qos level to use when publishing message
      * @param callback  qos level to use when publishing message
      * @return
      */
     @Source
-    public void subscribe(String topicName, @Optional @Default("2") int qos, final SourceCallback callback) throws ConnectionException {
+    public void subscribe(@Optional String topicName,@Optional String filter, @Optional @Default("1") int qos, final SourceCallback callback) throws ConnectionException {
         logger.info("Creating new client for topic subscription");
         String timestamp = Integer.toString(1);
         String subscriberId = "mulesubscriber" + timestamp;
 
         MqttClient subscriberClient = connectClient(subscriberId);
+
+        String[] filters;
+        int[] qoss;
+        logger.info("Deciding whether filter or name is used...");
+
+        if (StringUtils.isNotBlank(filter)) {
+            logger.info("Building filters list");
+            filters = filter.split(",");
+
+            logger.debug("I have " + filters.length + " filters defined.  Creating matching queue of qos levels");
+            qoss = new int[filters.length];
+
+            for (int i = 0; i < filters.length; i++) {
+                qoss[i] = qos;
+            }
+        } else {
+            filters = null;
+            qoss = null;
+        }
 
         try {
             subscriberClient.disconnect();
@@ -342,7 +362,13 @@ public class MqttModule {
 
             Thread.sleep(getSubscriptionDelay());
 
-            subscriberClient.subscribe(topicName, qos);
+            if (filters != null) {
+                logger.debug("Subscribing to filters...");
+                subscriberClient.subscribe(filters, qoss);
+            } else {
+                logger.debug("Subscribing to topic name...");
+                subscriberClient.subscribe(topicName, qos);
+            }
         } catch (MqttException e) {
             logger.error("MQTT Exceptions occurred subscribing", e);
             throw new ConnectionException(ConnectionExceptionCode.UNKNOWN, null, "Subscription Error", e);

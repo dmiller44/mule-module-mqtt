@@ -3,4 +3,6 @@
 <!-- END_INCLUDE(mqtt:publish) -->
 <!-- BEGIN_INCLUDE(mqtt:subscribe) -->
 <mqtt:subscribe topicName="test/subscribe" qos="0" />
+
+<mqtt:subscribe filter="test/#" qos="2" />
 <!-- END_INCLUDE(mqtt:subscribe) -->
