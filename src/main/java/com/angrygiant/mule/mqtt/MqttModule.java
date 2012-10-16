@@ -294,8 +294,10 @@ public class MqttModule {
 
         logger.debug("Decipher whether we're using String or Message payload");
         if (StringUtils.isNotBlank(payload)) {
+            logger.debug("Using the string message...");
             payloadBytes = payload.getBytes();
         } else if (messagePayload instanceof byte[]) {
+            logger.debug("Message payload is a byte array, using it directly...");
             payloadBytes = (byte[]) messagePayload;
         } else {
             logger.info("Converting message payload to a byte array...");
