@@ -269,14 +269,14 @@ public class MqttModule {
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:publish}
      *
      * @param topicName       topic to publish message to
-     * @param payload         payload to publish message to (if blank/null, uses messagePayload)
+     * @param message         payload to publish message to (if blank/null, uses messagePayload)
      * @param qos             qos level to use when publishing message
      * @param messagePayload  injects passed payload into this object (for possible use)
      * @param outboundHeaders injected outbound headers map so we can set them prior to leaving
      * @return MqttMuleMessage instance
      */
     @Processor
-    public byte[] publish(String topicName, String payload, @Optional @Default("1") int qos, @Payload Object messagePayload, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException, IOException {
+    public byte[] publish(String topicName, String message, @Optional @Default("1") int qos, @Payload Object messagePayload, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException, IOException {
         byte[] payloadBytes;
 
         logger.debug("Connecting to Broker...");
@@ -293,9 +293,9 @@ public class MqttModule {
         }
 
         logger.debug("Decipher whether we're using String or Message payload");
-        if (StringUtils.isNotBlank(payload)) {
+        if (StringUtils.isNotBlank(message)) {
             logger.debug("Using the string message...");
-            payloadBytes = payload.getBytes();
+            payloadBytes = message.getBytes();
         } else if (messagePayload instanceof byte[]) {
             logger.debug("Message payload is a byte array, using it directly...");
             payloadBytes = (byte[]) messagePayload;
@@ -317,11 +317,11 @@ public class MqttModule {
         MqttTopic topic = this.client.getTopic(topicName);
 
         logger.debug("Preparing message...");
-        MqttMessage message = new MqttMessage(payloadBytes);
-        message.setQos(qos);
+        MqttMessage mqttMessage = new MqttMessage(payloadBytes);
+        mqttMessage.setQos(qos);
 
         logger.debug("publishing message to broker...");
-        MqttDeliveryToken token = topic.publish(message);
+        MqttDeliveryToken token = topic.publish(mqttMessage);
 
         logger.trace("Waiting for default timeout of 5minutes...");
         token.waitForCompletion(900000);
@@ -331,13 +331,13 @@ public class MqttModule {
         }
 
         outboundHeaders.put(MqttTopicListener.TOPIC_NAME, topic.getName());
-        outboundHeaders.put(MqttTopicListener.MESSAGE_DUPLICATE, message.isDuplicate());
-        outboundHeaders.put(MqttTopicListener.MESSAGE_RETAIN, message.isRetained());
-        outboundHeaders.put(MqttTopicListener.MESSAGE_QOS, message.getQos());
+        outboundHeaders.put(MqttTopicListener.MESSAGE_DUPLICATE, mqttMessage.isDuplicate());
+        outboundHeaders.put(MqttTopicListener.MESSAGE_RETAIN, mqttMessage.isRetained());
+        outboundHeaders.put(MqttTopicListener.MESSAGE_QOS, mqttMessage.getQos());
         outboundHeaders.put(MqttTopicListener.CLIENT_ID, this.client.getClientId());
         outboundHeaders.put(MqttTopicListener.CLIENT_URI, this.client.getServerURI());
 
-        return message.getPayload();
+        return mqttMessage.getPayload();
     }
 
     /**
