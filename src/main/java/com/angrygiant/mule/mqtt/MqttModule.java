@@ -17,9 +17,14 @@ import org.mule.api.annotations.lifecycle.Stop;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.OutboundHeaders;
+import org.mule.api.annotations.param.Payload;
 import org.mule.api.callback.SourceCallback;
 
 import javax.annotation.PreDestroy;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -264,13 +269,16 @@ public class MqttModule {
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:publish}
      *
      * @param topicName       topic to publish message to
-     * @param payload         payload to publish message to
+     * @param payload         payload to publish message to (if blank/null, uses messagePayload)
      * @param qos             qos level to use when publishing message
+     * @param messagePayload  injects passed payload into this object (for possible use)
      * @param outboundHeaders injected outbound headers map so we can set them prior to leaving
      * @return MqttMuleMessage instance
      */
     @Processor
-    public byte[] publish(String topicName, String payload, @Optional @Default("2") int qos, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException {
+    public byte[] publish(String topicName, String payload, @Optional @Default("2") int qos, @Payload Object messagePayload, @OutboundHeaders Map<String, Object> outboundHeaders) throws MqttException, IOException {
+        byte[] payloadBytes;
+
         logger.debug("Connecting to Broker...");
         if (!this.client.isConnected()) {
             this.client.connect();
@@ -284,11 +292,25 @@ public class MqttModule {
             qos = 2;
         }
 
+        logger.debug("Decipher whether we're using String or Message payload");
+        if (StringUtils.isNotBlank(payload)) {
+            payloadBytes = payload.getBytes();
+        } else if (messagePayload instanceof byte[]) {
+            payloadBytes = (byte[]) messagePayload;
+        } else {
+            logger.info("Converting message payload to a byte array...");
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(bos);
+            out.writeObject(messagePayload);
+
+            payloadBytes = bos.toByteArray();
+        }
+
         logger.debug("Retrieving topic '" + topicName + "'");
         MqttTopic topic = this.client.getTopic(topicName);
 
         logger.debug("Preparing message...");
-        MqttMessage message = new MqttMessage(payload.getBytes());
+        MqttMessage message = new MqttMessage(payloadBytes);
         message.setQos(qos);
 
         logger.debug("publishing message to broker...");
