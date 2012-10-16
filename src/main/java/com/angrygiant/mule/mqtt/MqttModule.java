@@ -50,7 +50,7 @@ import java.util.Map;
  *
  * @author dmiller@angrygiant.com
  */
-@Module(name = "mqtt", schemaVersion = "0.1")
+@Module(name = "mqtt", schemaVersion = "0.2")
 public class MqttModule {
     private static final Logger logger = Logger.getLogger(MqttModule.class);
 
