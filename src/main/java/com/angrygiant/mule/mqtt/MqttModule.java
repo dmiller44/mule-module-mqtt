@@ -301,9 +301,14 @@ public class MqttModule {
             logger.info("Converting message payload to a byte array...");
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutput out = new ObjectOutputStream(bos);
-            out.writeObject(messagePayload);
 
-            payloadBytes = bos.toByteArray();
+            try {
+                out.writeObject(messagePayload);
+                payloadBytes = bos.toByteArray();
+            } finally {
+                bos.close();
+                out.close();
+            }
         }
 
         logger.debug("Retrieving topic '" + topicName + "'");
