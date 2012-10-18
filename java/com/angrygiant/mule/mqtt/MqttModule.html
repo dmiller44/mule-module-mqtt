@@ -1025,7 +1025,7 @@ Summary:
             byte[]</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/angrygiant/mule/mqtt/MqttModule.html#publish(java.lang.String, java.lang.String, int, java.util.Map<java.lang.String, java.lang.Object>)">publish</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> payload, int qos, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; outboundHeaders)</nobr>
+        <span class="sympad"><a href="../../../../../com/angrygiant/mule/mqtt/MqttModule.html#publish(java.lang.String, java.lang.String, int, java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)">publish</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> message, int qos, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> messagePayload, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; outboundHeaders)</nobr>
         
         <div class="jd-descrdiv">Publish processor - used to publish a message to a given topic on the MQTT broker.</div>
   
@@ -1285,7 +1285,7 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../com/angrygiant/mule/mqtt/MqttModule.html#subscribe(java.lang.String, int, org.mule.api.callback.SourceCallback)">subscribe</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, int qos, SourceCallback callback)</nobr>
+        <span class="sympad"><a href="../../../../../com/angrygiant/mule/mqtt/MqttModule.html#subscribe(java.lang.String, java.lang.String, int, org.mule.api.callback.SourceCallback)">subscribe</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> filter, int qos, SourceCallback callback)</nobr>
         
         <div class="jd-descrdiv">Publish processor - used to publish a message to a given topic on the MQTT broker.</div>
   
@@ -2681,7 +2681,7 @@ From class
 </div>
 
 
-<A NAME="publish(java.lang.String, java.lang.String, int, java.util.Map<java.lang.String, java.lang.Object>)"></A>
+<A NAME="publish(java.lang.String, java.lang.String, int, java.lang.Object, java.util.Map<java.lang.String, java.lang.Object>)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -2694,7 +2694,7 @@ From class
         byte[]
       </span>
       <span class="sympad">publish</span>
-      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> payload, int qos, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; outboundHeaders)</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> message, int qos, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> messagePayload, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; outboundHeaders)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -2718,12 +2718,16 @@ From class
           <td>Topic to publish message to</td>
         </tr>
         <tr>
-          <th>payload</td>
-          <td>Payload to publish message to</td>
+          <th>message</td>
+          <td>String message to publish (if blank/null, uses messagePayload)</td>
         </tr>
         <tr>
           <th>qos</td>
           <td>Qos level to use when publishing message</td>
+        </tr>
+        <tr>
+          <th>messagePayload</td>
+          <td>Injects passed payload into this object (for possible use)</td>
         </tr>
         <tr>
           <th>outboundHeaders</td>
@@ -2733,12 +2737,16 @@ From class
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Returns</h5>
-      <ul class="nolist"><li>MqttMuleMessage instance
+      <ul class="nolist"><li>delivered byte[] payload of MqttMessage
 </li></ul>
   </div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Throws</h5>
       <table class="jd-tagtable">  
+        <tr>
+            <th><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/io/IOException.html">IOException</a></td>
+            <td></td>
+        </tr>  
         <tr>
             <th>MqttException</td>
             <td></td>
@@ -3350,7 +3358,7 @@ From class
 </div>
 
 
-<A NAME="subscribe(java.lang.String, int, org.mule.api.callback.SourceCallback)"></A>
+<A NAME="subscribe(java.lang.String, java.lang.String, int, org.mule.api.callback.SourceCallback)"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -3363,7 +3371,7 @@ From class
         void
       </span>
       <span class="sympad">subscribe</span>
-      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, int qos, SourceCallback callback)</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> topicName, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> filter, int qos, SourceCallback callback)</span>
     </h4>
       <div class="api-level">
         <div>
@@ -3385,6 +3393,10 @@ From class
         <tr>
           <th>topicName</td>
           <td>Topic to publish message to</td>
+        </tr>
+        <tr>
+          <th>filter</td>
+          <td>Topic filter string, comma delimited if multiple (takes precedence over topic name)</td>
         </tr>
         <tr>
           <th>qos</td>

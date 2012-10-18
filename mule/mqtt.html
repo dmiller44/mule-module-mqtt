@@ -221,7 +221,7 @@ Summary:
 
 <div id="jd-header">
     com.angrygiant.mule
-<h1>mqtt</h1>
+<h1>mule-module-mqtt</h1>
 
 </div><!-- end header -->
 
@@ -240,7 +240,7 @@ Summary:
           <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/mqtt/current/mule-mqtt.xsd&nbsp;&nbsp;(<a href="mqtt-schema.html">View Schema</a>)</td>
         </tr>
 <tr>
-          <th>Schema Version</th><td>0.1</td>
+          <th>Schema Version</th><td>0.2</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -581,9 +581,9 @@ specify which configuration to use.</p>
           
                 
                 <tr class="alt-color api apilevel-" >
-                    <td class="jd-linkcol"><nobr>payload</nobr></td>
+                    <td class="jd-linkcol"><nobr>message</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Payload to publish message to</td>
+                    <td class="jd-descrcol" width="100%">String message to publish (if blank/null, uses messagePayload)</td>
                 </tr>
                 
                 
@@ -591,8 +591,17 @@ specify which configuration to use.</p>
                 
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>qos</nobr></td>
-                    <td class="jd-descrcol">2</td>
+                    <td class="jd-descrcol">1</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Qos level to use when publishing message</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
+                    <td class="jd-linkcol"><nobr>messagePayload</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Injects passed payload into this object (for possible use)</td>
                 </tr>
                 
                 
@@ -615,6 +624,8 @@ specify which configuration to use.</p>
             
           
             
+          
+            
             <tr><th colspan="12"><nobr>&lt;mqtt:outbound-headers&gt;</nobr></br><span style="font-weight: normal;">Injected outbound headers map so we can set them prior to leaving</span></th></tr>
             
             
@@ -624,7 +635,7 @@ specify which configuration to use.</p>
   
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Return Payload</h5>
-      <ul class="nolist"><li>MqttMuleMessage instance
+      <ul class="nolist"><li>delivered byte[] payload of MqttMessage
 </li></ul>
   </div>
     
@@ -634,6 +645,10 @@ specify which configuration to use.</p>
       <table class="jd-sumtable">
         <tr><th>Payload Class</th><th>Description</th></tr>
         
+        <tr>
+            <td><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/io/IOException.html">IOException</a></td>
+            <td></td>
+        </tr>
         <tr>
             <td>MqttException</td>
             <td></td>
@@ -671,7 +686,9 @@ specify which configuration to use.</p>
   <div class="jd-tagdata jd-tagdescr"><p>Publish processor - used to publish a message to a given topic on the MQTT broker.
  <p/>
  <p/>
- <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;mqtt:subscribe topicName="test/subscribe" qos="0" /&gt;</pre></div></p></div>
+ <div class="jd-tagdata"><h5 class="jd-tagtitle">XML Sample</h5><pre>&lt;mqtt:subscribe topicName="test/subscribe" qos="0" /&gt;
+
+&lt;mqtt:subscribe filter="test/#" qos="2" /&gt;</pre></div></p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Attributes</h5>
 
@@ -687,22 +704,31 @@ specify which configuration to use.</p>
                 <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>topicName</nobr></td>
                     <td class="jd-descrcol"></td>
-                    <td class="jd-descrcol" width="100%">Topic to publish message to</td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Topic to publish message to</td>
                 </tr>
                 
                 
           
                 
                 <tr class="alt-color api apilevel-" >
-                    <td class="jd-linkcol"><nobr>qos</nobr></td>
-                    <td class="jd-descrcol">2</td>
-                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Qos level to use when publishing message</td>
+                    <td class="jd-linkcol"><nobr>filter</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Topic filter string, comma delimited if multiple (takes precedence over topic name)</td>
                 </tr>
                 
                 
           
                 
                 <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>qos</nobr></td>
+                    <td class="jd-descrcol">1</td>
+                    <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Qos level to use when publishing message</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>callback</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Qos level to use when publishing message</td>
@@ -718,6 +744,8 @@ specify which configuration to use.</p>
       <h5 class="jd-tagtitle">Child Elements</h5>
         <table id="lconfig" class="jd-sumtable">
           
+          
+            
           
             
           

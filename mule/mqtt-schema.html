@@ -208,7 +208,7 @@
 
 <div id="jd-header">
     com.angrygiant.mule
-<h1>mqtt</h1>
+<h1>mule-module-mqtt</h1>
 
 </div><!-- end header -->
 
@@ -225,7 +225,7 @@
           <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/mqtt/current/mule-mqtt.xsd&nbsp;&nbsp;(<a href="mqtt-schema.html">View Schema</a>)</td>
         </tr>
 <tr>
-          <th>Schema Version</th><td>0.1</td>
+          <th>Schema Version</th><td>0.2</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -498,12 +498,12 @@ Module definition for publishing and subscribing to a given MQTT broker server.
             &lt;xs:documentation&gt;topic to publish message to&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute name=&quot;payload&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
+        &lt;xs:attribute name=&quot;message&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
-            &lt;xs:documentation&gt;payload to publish message to&lt;/xs:documentation&gt;
+            &lt;xs:documentation&gt;string message to publish (if blank/null, uses messagePayload)&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/mqtt&quot; name=&quot;qos&quot; default=&quot;2&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/mqtt&quot; name=&quot;qos&quot; default=&quot;1&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;qos level to use when publishing message&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
@@ -526,12 +526,17 @@ Module definition for publishing and subscribing to a given MQTT broker server.
             &lt;xs:documentation&gt;Specify which configuration to use for this invocation.&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute name=&quot;topicName&quot; use=&quot;required&quot; type=&quot;xs:string&quot;&gt;
+        &lt;xs:attribute name=&quot;topicName&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;topic to publish message to&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;
         &lt;/xs:attribute&gt;
-        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/mqtt&quot; name=&quot;qos&quot; default=&quot;2&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
+        &lt;xs:attribute name=&quot;filter&quot; use=&quot;optional&quot; type=&quot;xs:string&quot;&gt;
+          &lt;xs:annotation&gt;
+            &lt;xs:documentation&gt;topic filter string, comma delimited if multiple (takes precedence over topic name)&lt;/xs:documentation&gt;
+          &lt;/xs:annotation&gt;
+        &lt;/xs:attribute&gt;
+        &lt;xs:attribute xmlns=&quot;http://www.mulesoft.org/schema/mule/mqtt&quot; name=&quot;qos&quot; default=&quot;1&quot; use=&quot;optional&quot; type=&quot;integerType&quot;&gt;
           &lt;xs:annotation&gt;
             &lt;xs:documentation&gt;qos level to use when publishing message&lt;/xs:documentation&gt;
           &lt;/xs:annotation&gt;

@@ -456,7 +456,7 @@ Summary:
 
 
 <h2>Class Overview</h2>
-<p>SubscribeMessageSource wraps <code><a href="../../../../../../java/com/angrygiant/mule/mqtt/MqttModule.html#subscribe(java.lang.String, int, org.mule.api.callback.SourceCallback)">subscribe(java.lang.String, int, org.mule.api.callback.SourceCallback)</a></code> method in <code><a href="../../../../../../java/com/angrygiant/mule/mqtt/MqttModule.html">MqttModule</a></code> as a message source capable of generating Mule events.  The POJO's method is invoked in its own thread.
+<p>SubscribeMessageSource wraps <code><a href="../../../../../../java/com/angrygiant/mule/mqtt/MqttModule.html#subscribe(java.lang.String, java.lang.String, int, org.mule.api.callback.SourceCallback)">subscribe(java.lang.String, java.lang.String, int, org.mule.api.callback.SourceCallback)</a></code> method in <code><a href="../../../../../../java/com/angrygiant/mule/mqtt/MqttModule.html">MqttModule</a></code> as a message source capable of generating Mule events.  The POJO's method is invoked in its own thread.
  
 </p>
 
@@ -626,8 +626,8 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          int</nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#_qosType">_qosType</a></td>
+          <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#_filterType">_filterType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -637,8 +637,30 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
+          int</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#_qosType">_qosType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
           <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a></nobr></td>
           <td class="jd-linkcol"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#_topicNameType">_topicNameType</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#filter">filter</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -874,6 +896,24 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#setFilter(java.lang.Object)">setFilter</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</nobr>
+        
+        <div class="jd-descrdiv">Sets filter</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../../com/angrygiant/mule/mqtt/sources/SubscribeMessageSource.html#setFlowConstruct(org.mule.api.construct.FlowConstruct)">setFlowConstruct</a></span>(FlowConstruct flowConstruct)</nobr>
         
         <div class="jd-descrdiv">Sets flow construct</div>
@@ -882,7 +922,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -900,7 +940,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -918,7 +958,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -936,7 +976,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -954,7 +994,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -972,7 +1012,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class=" api apilevel-" >
+    <tr class="alt-color api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -990,7 +1030,7 @@ org.mule.api.lifecycle.Stoppable
 
 
 	 
-    <tr class="alt-color api apilevel-" >
+    <tr class=" api apilevel-" >
         <td class="jd-typecol"><nobr>
             
             
@@ -1623,6 +1663,36 @@ From interface
 
 
 
+<A NAME="_filterType"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>
+      </span>
+        _filterType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
 <A NAME="_qosType"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1664,6 +1734,36 @@ From interface
         <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>
       </span>
         _topicNameType
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="filter"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
+      </span>
+        filter
     </h4>
       <div class="api-level">
         
@@ -2174,6 +2274,47 @@ From interface
   <div class="jd-tagdata jd-tagdescr"><p>Implementation <code><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Runnable.html#run()">run()</a></code> that will invoke the method on the pojo that this message source wraps.
  
 </p></div>
+
+    </div>
+</div>
+
+
+<A NAME="setFilter(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setFilter</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets filter</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
 
     </div>
 </div>

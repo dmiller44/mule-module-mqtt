@@ -196,12 +196,16 @@
 >
 <parameter name="topicName" type="java.lang.String">
 </parameter>
-<parameter name="payload" type="java.lang.String">
+<parameter name="message" type="java.lang.String">
 </parameter>
 <parameter name="qos" type="int">
 </parameter>
+<parameter name="messagePayload" type="java.lang.Object">
+</parameter>
 <parameter name="outboundHeaders" type="java.util.Map&lt;java.lang.String, java.lang.Object&gt;">
 </parameter>
+<exception name="IOException" type="java.io.IOException">
+</exception>
 <exception name="MqttException" type="org.eclipse.paho.client.mqttv3.MqttException">
 </exception>
 </method>
@@ -411,6 +415,8 @@
  visibility="public"
 >
 <parameter name="topicName" type="java.lang.String">
+</parameter>
+<parameter name="filter" type="java.lang.String">
 </parameter>
 <parameter name="qos" type="int">
 </parameter>
@@ -1212,6 +1218,32 @@
 <parameter name="flowConstruct" type="org.mule.api.construct.FlowConstruct">
 </parameter>
 </method>
+<method name="setMessage"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
+<method name="setMessagePayload"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
 <method name="setModuleObject"
  return="void"
  abstract="false"
@@ -1239,19 +1271,6 @@
 </parameter>
 </method>
 <method name="setOutboundHeaders"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="value" type="java.lang.Object">
-</parameter>
-</method>
-<method name="setPayload"
  return="void"
  abstract="false"
  native="false"
@@ -1329,8 +1348,8 @@
 <exception name="MuleException" type="org.mule.api.MuleException">
 </exception>
 </method>
-<field name="_outboundHeadersType"
- type="java.util.Map"
+<field name="_messagePayloadType"
+ type="java.lang.Object"
  transient="false"
  volatile="false"
  static="false"
@@ -1339,8 +1358,18 @@
  visibility="private"
 >
 </field>
-<field name="_payloadType"
+<field name="_messageType"
  type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="_outboundHeadersType"
+ type="java.util.Map"
  transient="false"
  volatile="false"
  static="false"
@@ -1399,6 +1428,26 @@
  visibility="private"
 >
 </field>
+<field name="message"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="messagePayload"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
 <field name="moduleObject"
  type="java.lang.Object"
  transient="false"
@@ -1431,16 +1480,6 @@
 </field>
 <field name="patternInfo"
  type="org.mule.util.TemplateParser.PatternInfo"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="private"
->
-</field>
-<field name="payload"
- type="java.lang.Object"
  transient="false"
  volatile="false"
  static="false"
@@ -1586,6 +1625,19 @@
  visibility="public"
 >
 </method>
+<method name="setFilter"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
 <method name="setFlowConstruct"
  return="void"
  abstract="false"
@@ -1690,6 +1742,16 @@
 <exception name="MuleException" type="org.mule.api.MuleException">
 </exception>
 </method>
+<field name="_filterType"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
 <field name="_qosType"
  type="int"
  transient="false"
@@ -1702,6 +1764,16 @@
 </field>
 <field name="_topicNameType"
  type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="filter"
+ type="java.lang.Object"
  transient="false"
  volatile="false"
  static="false"
