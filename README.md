@@ -34,13 +34,13 @@ To see a full, in-depth howto, please visit my blog @ [http://dnbmiller.wordpres
 ADDITIONAL RESOURCES
 ====================
 
-Author:  Daniel Miller (dmiller@angrygiant.com)
-Twitter:  @hockeymann44
-Source Code:  [http://github.com/dmiller44/mule-module-mqtt][source]
-Documentation:  [http://dmiller44.github.com/mule-module-mqtt/mule/mqtt.html][doc]
-MQTT website:  [http://mqtt.org][mqtt]
-Eclipse Paho Client (on which the module is based on):  [https://github.com/eclipse/paho.mqtt.java][paho]
-My Blog:  [http://dnbmiller.wordpress.com][blog]
+* Author:  Daniel Miller (dmiller@angrygiant.com)
+* Twitter:  @hockeymann44
+* Source Code:  [http://github.com/dmiller44/mule-module-mqtt][source]
+* Documentation:  [http://dmiller44.github.com/mule-module-mqtt/mule/mqtt.html][doc]
+* MQTT website:  [http://mqtt.org][mqtt]
+* Eclipse Paho Client (on which the module is based on):  [https://github.com/eclipse/paho.mqtt.java][paho]
+* My Blog:  [http://dnbmiller.wordpress.com][blog]
 
 
 
