@@ -1,38 +1,44 @@
 
-WELCOME
+SUMMARY
 =======
-Congratulations you have just created a new Mule Module!
+The MQTT module was created as another option of communication for the Mule ESB.  MQTT is a protocol typically
+used in M2M communication, which is tolerant of environments where the client device could get disconnected or
+experience a high latency situation.
 
-This wizard created a number of new classes and resources useful for Mule
-modules.  Each of the created files contains documentation and TODO
-items where necessary.  Here is an overview of what was created.
-
-./pom.xml:
-A maven project descriptor that describes how to build this module.
-
-./LICENSE.md:
-The open source license text for this project.
+MQTT (http://mqtt.org/) is similar to many other messaging protocols, such as AMQP and JMS.  Communication occurs over a "topic", and
+has a given Quality of Service (QOS) setting that ranges from "fire and forget" to "guaranteed delivery".
 
 TESTING
 =======
 
-This  project also contains test classes that can be run as part of a test
-suite.
+Test cases are still being worked on in this module.  Please see the "Quick Start" section to get a working environment
+set up locally.
+
+QUICK START
+===========
+
+Requirements:  An MQTT Broker (such as Mosquitto, found at http://mosquitto.org/), or a freely available public server (list of servers found at http://mqtt.org/wiki/doku.php/public_brokers)
+
+1)  Ensure that you have a broker up and running, and are capable of passing messages via a given topic.
+2)  Ensure you have a running Mule ESB instance.  The module has only been tested on Mule ESB v3.2.2
+3)  Install the MQTT Module into the ESB, or into your Mule application.
+4)  Create a Mule application. (Either via Mule Studio, or Maven:  http://www.mulesoft.org/documentation/display/MULE3USER/Creating+Project+Archetypes)
+5)  Install the "mqtt" namespace into your application.
+6)  Configure your Mule MQTT module to point to your broker, using the <mqtt:config /> object.
+7)  Create a new Mule flow.  If this flow is subscribing to incoming MQTT messages, use the <mqtt:subscribe /> endpoint.  To publish, use <mqtt:publish />.
+8)  Compile and deploy your application to Mule, ensuring the application starts appropriately.
+9)  Finally, start sending and receiving messages via MQTT!!
+
+To see a full, in-depth howto, please visit my blog @ http://dnbmiller.wordpress.com.
 
 ADDITIONAL RESOURCES
 ====================
-Everything you need to know about getting started with Mule can be found here:
-http://www.mulesoft.org/documentation/display/MULE3INTRO/Home
 
-There further useful information about extending Mule here:
-http://www.mulesoft.org/documentation/display/DEVKIT/Home
+Author:  Daniel Miller (dmiller@angrygiant.com)
+Twitter:  @hockeymann44
+Source Code:  http://github.com/dmiller44/mule-module-mqtt
+Documentation:  http://dmiller44.github.com/mule-module-mqtt/mule/mqtt.html
+MQTT website:  http://mqtt.org
+Eclipse Paho Client (on which the module is based on):  https://github.com/eclipse/paho.mqtt.java
+My Blog:  http://dnbmiller.wordpress.com
 
-Remember if you get stuck you can try getting help on the Mule user list:
-http://www.mulesoft.org/email-lists
-
-Also, MuleSoft, the company behind Mule, offers 24x7 support options:
-http://www.mulesoft.com/enterprise-subscriptions-and-support
-
-Enjoy your Mule ride!
-
-The Mule Team
