@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.angrygiant.mule</groupId>
     <artifactId>mule-module-mqtt</artifactId>
-    <version>0.2</version>
+    <version>0.2.1-SNAPSHOT</version>
     <packaging>mule-module</packaging>
     <name>Mule MQTT Module</name>
 
