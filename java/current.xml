@@ -414,6 +414,8 @@
  deprecated="not deprecated"
  visibility="public"
 >
+<parameter name="subscriberId" type="java.lang.String">
+</parameter>
 <parameter name="topicName" type="java.lang.String">
 </parameter>
 <parameter name="filter" type="java.lang.String">
@@ -1703,6 +1705,19 @@
 <parameter name="value" type="java.lang.Object">
 </parameter>
 </method>
+<method name="setSubscriberId"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
+</parameter>
+</method>
 <method name="setTopicName"
  return="void"
  abstract="false"
@@ -1754,6 +1769,16 @@
 </field>
 <field name="_qosType"
  type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="_subscriberIdType"
+ type="java.lang.String"
  transient="false"
  volatile="false"
  static="false"
@@ -1823,6 +1848,16 @@
 >
 </field>
 <field name="qos"
+ type="java.lang.Object"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="subscriberId"
  type="java.lang.Object"
  transient="false"
  volatile="false"

@@ -240,7 +240,7 @@ Summary:
           <th>Schema Location</th><td>http://www.mulesoft.org/schema/mule/mqtt/current/mule-mqtt.xsd&nbsp;&nbsp;(<a href="mqtt-schema.html">View Schema</a>)</td>
         </tr>
 <tr>
-          <th>Schema Version</th><td>0.2</td>
+          <th>Schema Version</th><td>0.2.1</td>
         </tr>
 <tr>
           <th>Minimum Mule Version</th><td>3.2</td>
@@ -702,6 +702,15 @@ specify which configuration to use.</p>
           
                 
                 <tr class=" api apilevel-" >
+                    <td class="jd-linkcol"><nobr>subscriberId</nobr></td>
+                    <td class="jd-descrcol"></td>
+                    <td class="jd-descrcol" width="100%">Required subscriber id to use for subscription</td>
+                </tr>
+                
+                
+          
+                
+                <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>topicName</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Topic to publish message to</td>
@@ -710,7 +719,7 @@ specify which configuration to use.</p>
                 
           
                 
-                <tr class="alt-color api apilevel-" >
+                <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>filter</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Topic filter string, comma delimited if multiple (takes precedence over topic name)</td>
@@ -719,7 +728,7 @@ specify which configuration to use.</p>
                 
           
                 
-                <tr class=" api apilevel-" >
+                <tr class="alt-color api apilevel-" >
                     <td class="jd-linkcol"><nobr>qos</nobr></td>
                     <td class="jd-descrcol">1</td>
                     <td class="jd-descrcol" width="100%"><i>Optional.&nbsp;</i>Qos level to use when publishing message</td>
@@ -728,7 +737,7 @@ specify which configuration to use.</p>
                 
           
                 
-                <tr class="alt-color api apilevel-" >
+                <tr class=" api apilevel-" >
                     <td class="jd-linkcol"><nobr>callback</nobr></td>
                     <td class="jd-descrcol"></td>
                     <td class="jd-descrcol" width="100%">Qos level to use when publishing message</td>
@@ -744,6 +753,8 @@ specify which configuration to use.</p>
       <h5 class="jd-tagtitle">Child Elements</h5>
         <table id="lconfig" class="jd-sumtable">
           
+          
+            
           
             
           
