@@ -192,6 +192,7 @@ public class MqttModule {
      * @throws ConnectionException
      */
     private MqttClient connectClient(String clientId) throws ConnectionException {
+        logger.warn("Creating client with ID of " + clientId);
         String brokerUrl = "tcp://" + getBrokerHostName() + ":" + getBrokerPort();
 
         MqttDefaultFilePersistence filePersistence = null;
@@ -210,7 +211,7 @@ public class MqttModule {
         try {
             if (filePersistence == null) {
                 logger.debug("Creating client without file persistence");
-                this.client = new MqttClient(brokerUrl, clientId);
+                this.client = new MqttClient(brokerUrl, clientId, null);
             } else {
                 logger.debug("Creating client with file persistence enabled");
                 this.client = new MqttClient(brokerUrl, clientId, filePersistence);
@@ -346,6 +347,7 @@ public class MqttModule {
      * <p/>
      * {@sample.xml ../../../doc/mqtt-connector.xml.sample mqtt:subscribe}
      *
+     * @param subscriberId required subscriber id to use for subscription
      * @param topicName topic to publish message to
      * @param filter topic filter string, comma delimited if multiple (takes precedence over topic name)
      * @param qos       qos level to use when publishing message
@@ -353,11 +355,8 @@ public class MqttModule {
      * @return
      */
     @Source
-    public void subscribe(@Optional String topicName,@Optional String filter, @Optional @Default("1") int qos, final SourceCallback callback) throws ConnectionException {
+    public void subscribe(String subscriberId, @Optional String topicName,@Optional String filter, @Optional @Default("1") int qos, final SourceCallback callback) throws ConnectionException {
         logger.info("Creating new client for topic subscription");
-        String timestamp = Integer.toString(1);
-        String subscriberId = "mulesubscriber" + timestamp;
-
         MqttClient subscriberClient = connectClient(subscriberId);
 
         String[] filters;
